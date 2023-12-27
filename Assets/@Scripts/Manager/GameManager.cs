@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //private bool OnCheckPoint;
-    //[SerializeField] private Transform checkPoint;
+    #region Singileton
 
-    //private void OnTriggerEnter(Collider col)
-    //{
-    //    if (col.gameObject.tag == "Player")
-    //    {
-    //        col.gameObject.GetComponent<PlayerController>().checkPoint = checkPoint.position;
+    private static GameManager instance;
 
-    //        OnCheckPoint = true;
-    //    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-    //    else OnCheckPoint = false;
-    //}
+    #endregion
+
+    #region Fields
+
+    private bool OnCheckPoint;
+    [SerializeField] private Transform checkPoint;
+
+    #endregion
+
+
 }

@@ -4,12 +4,22 @@ using UnityEngine.UI;
 
 public class IntroCanvas : MonoBehaviour
 {
+    #region Fields
+
     private Button startBtn;
+
+    #endregion
+
+    #region Init
 
     private void Start()
     {
         FindButtonAndAddListener();
     }
+
+    #endregion
+
+    #region Methods
 
     private void FindButtonAndAddListener()
     {
@@ -29,4 +39,6 @@ public class IntroCanvas : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    #endregion
 }

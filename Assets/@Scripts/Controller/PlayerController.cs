@@ -4,33 +4,42 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
+    [SerializeField]
+    private float moveSpeed;
+    [SerializeField]
     private Vector2 curMovementInput;
-    public float jumpForce;
-    public LayerMask groundLayerMask;
+    [SerializeField]
+    private float jumpForce;
+    [SerializeField]
+    private LayerMask groundLayerMask;
 
     [Header("Look")]
-    public Transform cameraContainer;
-    public float minXLook;
-    public float maxXLook;
+    [SerializeField]
+    private Transform cameraContainer;
+    [SerializeField]
+    private float minXLook;
+    [SerializeField]
+    private float maxXLook;
     private float camCurXRot;
-    public float lookSensitivity;
+    [SerializeField]
+    private float lookSensitivity;
 
     private Vector2 mouseDelta;
+    private Vector3 checkPoint = new(0f, 2f, 0f);
 
     [HideInInspector]
     public bool canLook = true;
 
+
+
     private Rigidbody _rigidbody;
 
-    public static PlayerController instance;
     private void Awake()
     {
-        instance = this;
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -57,7 +66,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = dir;
     }
 
-    void CameraLook()
+    private void CameraLook()
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
@@ -95,22 +104,24 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Ray[] rays = new Ray[4]
+        var transform1 = transform;
+        var forward = transform1.forward;
+        var position = transform1.position;
+        var right = transform1.right;
+
+        Ray[] rays =
         {
-            new Ray(transform.position + (transform.forward * 0.4f) + (Vector3.up * 0.05f) , Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.4f)+ (Vector3.up * 0.05f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.4f) + (Vector3.up * 0.05f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.4f) + (Vector3.up * 0.05f), Vector3.down),
+            new(position + forward * 0.2f + (Vector3.up * 0.1f) , Vector3.down),
+            new(position + -forward * 0.2f+ (Vector3.up * 0.1f), Vector3.down),
+            new(position + right * 0.2f + (Vector3.up * 0.1f), Vector3.down),
+            new(position + -right * 0.2f + (Vector3.up * 0.1f), Vector3.down),
         };
 
-        for (int i = 0; i < rays.Length; i++)
+        foreach (var ray in rays)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
-            {
-                return true;
-            }
+            if (!Physics.Raycast(ray, out var hit, 0.2f, groundLayerMask)) continue;
+            return true;
         }
-
         return false;
     }
 
@@ -127,5 +138,15 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void LoadCheckPoint()
+    {
+        transform.position = checkPoint;
+    }
+
+    public void SetCheckPoint(Vector3 newCheckPoint)
+    {
+        checkPoint = newCheckPoint;
     }
 }
