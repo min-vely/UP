@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -97,10 +97,10 @@ public class PlayerController : MonoBehaviour
     {
         Ray[] rays = new Ray[4]
         {
-            new Ray(transform.position + (transform.forward * 0.4f) + (Vector3.up * 0.02f) , Vector3.down),
-            new Ray(transform.position + (-transform.forward * 0.4f)+ (Vector3.up * 0.02f), Vector3.down),
-            new Ray(transform.position + (transform.right * 0.4f) + (Vector3.up * 0.02f), Vector3.down),
-            new Ray(transform.position + (-transform.right * 0.4f) + (Vector3.up * 0.02f), Vector3.down),
+            new Ray(transform.position + (transform.forward * 0.4f) + (Vector3.up * 0.05f) , Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.4f)+ (Vector3.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.4f) + (Vector3.up * 0.05f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.4f) + (Vector3.up * 0.05f), Vector3.down),
         };
 
         for (int i = 0; i < rays.Length; i++)

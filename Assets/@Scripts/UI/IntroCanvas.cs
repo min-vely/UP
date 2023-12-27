@@ -4,30 +4,20 @@ using UnityEngine.UI;
 
 public class IntroCanvas : MonoBehaviour
 {
-    #region Field
-
-    private Button StartBtn;
-
-    #endregion
-
-    #region Init
+    private Button startBtn;
 
     private void Start()
     {
         FindButtonAndAddListener();
     }
 
-    #endregion
-
-    #region Methods
-
     private void FindButtonAndAddListener()
     {
-        StartBtn = GetComponent<Button>();
+        startBtn = GetComponent<Button>();
 
-        if (StartBtn != null)
+        if (startBtn != null)
         {
-            StartBtn.onClick.AddListener(LoadGameScene);
+            startBtn.onClick.AddListener(delegate { LoadGameScene(); });
         }
         else
         {
@@ -39,6 +29,4 @@ public class IntroCanvas : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-
-    #endregion
 }
