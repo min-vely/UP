@@ -48,13 +48,16 @@ public class PlayerController : MonoBehaviour
         get { return jumpForce; }
         private set { jumpForce = value; }
     }
-
+    public LayerMask GroundLayerMask
+    {
+        get { return groundLayerMask; }
+        private set { groundLayerMask = value; }
+    }
     public Transform CameraContainer
     {
         get { return cameraContainer; }
         private set { cameraContainer = value; }
     }
-
     public float MinXLook
     {
         get { return minXLook; }
@@ -116,12 +119,19 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            moveCommand.SetInput(context.ReadValue<Vector2>());
+            // moveCommand가 MoveCommand일 경우에만 SetInput 호출
+            if (moveCommand is MoveCommand moveCmd)
+            {
+                moveCmd.SetInput(context.ReadValue<Vector2>());
+            }
             moveCommand.Execute(this);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            moveCommand.SetInput(Vector2.zero);
+            if (moveCommand is MoveCommand moveCmd)
+            {
+                moveCmd.SetInput(Vector2.zero);
+            }
             moveCommand.Execute(this);
         }
     }
@@ -132,29 +142,6 @@ public class PlayerController : MonoBehaviour
         {
             jumpCommand.Execute(this);
         }
-    }
-
-    public bool IsGrounded()
-    {
-        var transform1 = transform;
-        var forward = transform1.forward;
-        var position = transform1.position;
-        var right = transform1.right;
-
-        Ray[] rays =
-        {
-            new(position + forward * 0.2f + (Vector3.up * 0.1f) , Vector3.down),
-            new(position + -forward * 0.2f+ (Vector3.up * 0.1f), Vector3.down),
-            new(position + right * 0.2f + (Vector3.up * 0.1f), Vector3.down),
-            new(position + -right * 0.2f + (Vector3.up * 0.1f), Vector3.down),
-        };
-
-        foreach (var ray in rays)
-        {
-            if (!Physics.Raycast(ray, out var hit, 0.2f, groundLayerMask)) continue;
-            return true;
-        }
-        return false;
     }
 
     private void OnDrawGizmos()

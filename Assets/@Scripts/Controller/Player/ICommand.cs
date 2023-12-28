@@ -4,6 +4,5 @@ using UnityEngine;
 
 interface ICommand
 {
-    void Execute(PlayerController playerController);
-    void SetInput(Vector2 input);
+    public void Execute(PlayerController playerController);
 }
