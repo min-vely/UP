@@ -34,18 +34,18 @@ public class Main : MonoBehaviour
 
     private readonly PlayerController _playerControl = new();
     //private readonly GameManager _game = new();
-    //private SoundManager _sound = new();
+    private SoundManager _sound = new();
 
     #endregion
 
     #region Properties
     public static PlayerController PlayerControl => Instance._playerControl;
     //public static GameManager Game => Instance._game;
-    //public static SoundManager Sound
-    //{
-    //    get => Instance._sound;
-    //    set => Instance._sound = value;
-    //}
+    public static SoundManager Sound
+    {
+        get => Instance._sound;
+        set => Instance._sound = value;
+    }
 
     #endregion
 }
