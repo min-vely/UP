@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
@@ -45,7 +43,7 @@ public class CheckPoint : MonoBehaviour
                 Vector3 updatedCheckPoint = transform.position + Vector3.up * 6f;
 
                 playerController.SetCheckPoint(updatedCheckPoint);
-                Debug.Log("체크포인트 설정 완료!");
+                //Debug.Log("체크포인트 설정 완료!");
 
                 // 파티클 시스템 활성화
                 if (confetti != null)

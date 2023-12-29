@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,13 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot;
     [SerializeField]
     private float lookSensitivity;
+
+    private bool _isStunned;
+    private bool _wasStunned;
+    private bool _slider = false;
+    private float _pushForce;
+    [SerializeField] private float gravity = 9.8f;
+    private Vector3 _pushDir;
 
     private Vector2 mouseDelta;
     private Vector3 checkPoint = new(0f, 2f, 0f); // 플레이어 초기 시작 장소
@@ -151,6 +159,41 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(transform.position + (transform.right * 0.2f), Vector3.down);
         Gizmos.DrawRay(transform.position + (-transform.right * 0.2f), Vector3.down);
     }
+
+    public void HitPlayer(Vector3 velocityF, float time)
+    {
+        _rigidbody.velocity = velocityF;
+        _pushForce = velocityF.magnitude;
+        _pushDir = Vector3.Normalize(velocityF);
+        StartCoroutine(Decrease(velocityF.magnitude, time));
+    }
+
+    private IEnumerator Decrease(float value, float duration)
+    {
+        if (_isStunned)
+        {
+            _wasStunned = true;
+            _isStunned = true;
+        }
+        var delta = value / duration;
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            yield return null;
+            if (!_slider) // 땅이 slide가 아니면 감소된 pushForce 적용
+            {
+                _pushForce -= Time.deltaTime * delta;
+                _pushForce = _pushForce < 0 ? 0 : _pushForce;
+            }
+            _rigidbody.AddForce(new Vector3(0, -gravity * _rigidbody.mass, 0));
+        }
+
+        if (_wasStunned) _wasStunned = false;
+        else
+        {
+            _isStunned = false;
+        }
+    }
+
 
     private void ToggleCursor(bool toggle)
     {

@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class MoveCommand : ICommand
 {
+    #region Fields
+
     private Vector2 input;
+
+    #endregion
+
+    #region Methods
 
     public void Execute(PlayerController playerController)
     {
@@ -21,4 +27,6 @@ public class MoveCommand : ICommand
     {
         this.input = input;
     }
+
+    #endregion
 }

@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 4637479790112601053}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3130825611506175034
 GameObject:
@@ -331,6 +331,7 @@ MonoBehaviour:
   minXLook: -85
   maxXLook: 85
   lookSensitivity: 0.2
+  gravity: 9.8
 --- !u!54 &1637787140019523768
 Rigidbody:
   m_ObjectHideFlags: 0

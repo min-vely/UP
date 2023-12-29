@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class JumpCommand : ICommand
 {
+    #region Methods
+
     public void Execute(PlayerController playerController)
     {
         if (IsGrounded(playerController))
@@ -36,4 +38,6 @@ public class JumpCommand : ICommand
         }
         return false;
     }
+
+    #endregion
 }

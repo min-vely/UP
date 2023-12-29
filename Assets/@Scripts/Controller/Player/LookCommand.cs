@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class LookCommand : ICommand
 {
+    #region Methods
+
     public void Execute(PlayerController playerController)
     {
         playerController.UpdateCamCurXRot(playerController.MouseDelta.y * playerController.LookSensitivity);
@@ -9,4 +11,6 @@ public class LookCommand : ICommand
 
         playerController.transform.eulerAngles += new Vector3(0, playerController.MouseDelta.x * playerController.LookSensitivity, 0);
     }
+
+    #endregion
 }
