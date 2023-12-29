@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Obstacles and Map Group
+  m_Name: Environment Group
   m_EditorClassIdentifier: 
-  m_GroupName: Obstacles and Map Group
+  m_GroupName: Environment Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 18647bb56aadf9845aa3584b012ae357
+  m_GUID: 43e290f8816f05043882bb57e961eae2
   m_SerializeEntries:
-  - m_GUID: 133c8dc4d12cf504591793389b2f6a58
-    m_Address: Limits.prefab
+  - m_GUID: 4c10661698e22f6458f96d4580b78bd8
+    m_Address: IntroEnvironment.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - IntroScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b26184bbc56fd541a6830e20c0321da
+    m_Address: GameEnvironment.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 327c9057d882a854e882e44a24e207a0
-    m_Address: Map.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - GameScene
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3738cc450c8221a41a947ed37c735859
-    m_Address: VillageOnMountain.prefab
+  - m_GUID: ea06917f3f5855f43bfb813e48d23c77
+    m_Address: Lights.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
@@ -39,5 +39,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 70b94865a6d01e3448a91b0f16ac937e, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 8b40e75c6f692b7469d695f2b554fc53, type: 2}
-    - {fileID: 11400000, guid: 70264b61b4410dc44bc6ba83b762010e, type: 2}
+    - {fileID: 11400000, guid: 5399c5a381f2f6a4d9560898f19e9258, type: 2}
+    - {fileID: 11400000, guid: 7f271ad0bfd4c904cbacc7abd9aa2733, type: 2}
